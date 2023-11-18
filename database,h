@@ -1,0 +1,79 @@
+//
+// Created by he on 23-11-18.
+//
+
+#ifndef UNTITLED1_DATABASE_H
+#define UNTITLED1_DATABASE_H
+
+#include <string>
+#include <vector>
+
+class InputDataBase {
+public:
+
+    struct Instances {
+        uint32_t inst_count{};
+        std::vector<std::string> v_inst{};
+    };
+
+    struct Module {
+        std::string name;            // 模块名称
+        // 其他属性，如位置坐标等
+    };
+
+    struct Net {
+        std::string name;                // 线网名称
+        std::vector<std::string> pins;   // 连接的引脚列表
+        // 其他属性，如线宽、线型等
+    };
+
+    struct LayoutDatabase {
+        int numRows;                       // 方格的行数
+        int numCols;                       // 方格的列数
+        std::vector<Module> modules;       // 模块列表
+        std::vector<Net> nets;             // 线网列表
+        // 可根据需要添加其他成员变量
+    };
+
+    struct Instance {
+        std::string name;
+    };
+
+    Instances& get_instance() {
+        return instances_;
+    }
+
+private:
+    Instances instances_;
+};
+
+class OutputDataBase {
+public:
+
+    struct Placement {
+        std::vector<std::string> moduleNames;   // 模块名称列表
+        std::vector<int> positions;             // 模块位置列表
+        // 其他属性，如布局评估指标等
+    };
+
+    struct Routing {
+        std::vector<std::string> netNames;       // 线网名称列表
+        std::vector<std::vector<int>> paths;     // 线网路径列表
+        // 其他属性，如路径长度等
+    };
+
+    struct Solution {
+        Placement placement;
+        Routing routing;
+        // 其他属性，如总线长度、布局评估指标等
+    };
+
+    Solution& get_solution() {
+        return solution_;
+    }
+
+private:
+    Solution solution_;
+};
+
+#endif
