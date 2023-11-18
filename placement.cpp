@@ -25,7 +25,7 @@ int calculateBusLength(const LayoutDatabase& layoutDB, const std::vector<int>& l
             minY = std::min(minY, row);
             maxY = std::max(maxY, row);
         }
-        busLength += (maxX - minX) + (maxY - minY);
+        busLength += (maxX - minX)^2 + (maxY - minY)^2;
     }
     return busLength;
 };
